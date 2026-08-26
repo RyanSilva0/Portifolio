@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ryan Barbosa | Front-End Developer & Freelancer</title>
+  <meta name="description" content="Portfólio profissional de Ryan Barbosa, desenvolvedor Front-End freelancer especializado em JavaScript, Tailwind CSS e Firebase." />
+  <meta name="author" content="Ryan Barbosa" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ryan Barbosa | Front-End Developer & Freelancer" />
+  <meta property="og:description" content="Desenvolvedor Front-End freelancer especializado em JavaScript, Tailwind CSS e Firebase. Veja projetos, stack e formas de contato." />
+  <meta property="og:image" content="assets/images/og-cover.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+
+  <!-- Fontes + estilos autorais -->
+  <link rel="stylesheet" href="/src/output.css">
+  <link rel="stylesheet" href="config.css">
+
+  <!--
+    TAILWIND VIA CDN
+    Este projeto usa o Tailwind Play CDN (build via JIT no navegador).
+    Não é necessário nenhum passo de instalação para visualizar o site.
+    Para migrar para uma instalação local, veja as instruções em src/input.css e no README.md.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-[var(--bg-0)] text-[var(--text-0)] antialiased">
+
+  <!-- Glow que segue o cursor (decorativo, desktop) -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Pular para o conteúdo (acessibilidade) -->
+  <a href="#inicio" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded">
+    Pular para o conteúdo
+  </a>
+
+  <!-- =========================================================
+       NAVBAR
+  ========================================================== -->
+  <header id="main-nav" class="glass-nav fixed top-0 inset-x-0 z-50">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Navegação principal">
+      <a href="#inicio" class="font-display text-lg font-semibold tracking-tight">
+        Ryan Barbosa <span class="text-[var(--accent)]">.</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 font-mono text-[13px] tracking-tight">
+        <li><a href="#inicio" class="nav-link active">início</a></li>
+        <li><a href="#sobre" class="nav-link">sobre</a></li>
+        <li><a href="#projetos" class="nav-link">projetos</a></li>
+        <li><a href="#stack" class="nav-link">tecnologias</a></li>
+        <li><a href="#contato" class="nav-link">contato</a></li>
+        </ul>
+
+      <a href="#contato" class="btn-primary hidden md:inline-flex rounded-full px-5 py-2.5 text-sm font-medium">
+        Vamos conversar
+      </a>
+
+      <!-- Botão hamburger (mobile) -->
+      <button
+        id="menu-toggle"
+        class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-panel"
+      >
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+      </button>
+    </nav>
+
+    <!-- Painel mobile -->
+    <div id="mobile-panel" class="mobile-panel md:hidden border-t border-[var(--border-soft)]">
+      <ul class="flex flex-col px-6 py-4 gap-1 font-mono text-sm">
+        <li><a href="#inicio" class="block py-3">início</a></li>
+        <li><a href="#sobre" class="block py-3">sobre</a></li>
+        <li><a href="#projetos" class="block py-3">projetos</a></li>
+        <li><a href="#stack" class="block py-3">tecnologias</a></li>
+        <li><a href="#contato" class="block py-3">contato</a></li>
+        <li class="pt-2">
+          <a href="#contato" class="btn-primary inline-flex w-full justify-center rounded-full px-5 py-3 text-sm font-medium">
+            Vamos conversar
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+    <section id="inicio" class="relative overflow-hidden pt-40 pb-28 md:pt-48 md:pb-36">
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full opacity-70"></canvas>
+      <div class="tech-grid" aria-hidden="true"></div>
+      <div class="noise-veil" aria-hidden="true"></div>
+
+      <div class="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
+        <!-- Texto -->
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-5 flex items-center gap-2">
+            <span aria-hidden="true">&lt;/&gt;</span> OLÁ MUNDO,SOU O RYAN BARBOSA
+          </p>
+
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] font-semibold tracking-tight text-[var(--text-0)]">
+            Transformo ideias em
+            <span class="block text-[var(--text-1)]">experiências digitais.</span>
+          </h1>
+
+          <p class="mt-6 text-base sm:text-lg text-[var(--text-1)] max-w-md leading-relaxed">
+            Desenvolvedor Front-End freelancer apaixonado por criar interfaces modernas, rápidas e funcionais para a web.
+          </p>
+
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#projetos" class="btn-primary rounded-full px-6 py-3.5 text-sm font-medium">
+              Ver meus projetos
+            </a>
+            <a href="#contato" class="btn-ghost rounded-full px-6 py-3.5 text-sm font-medium">
+              Entre em contato
+            </a>
+          </div>
+
+          <div class="mt-10 inline-flex items-center gap-3 font-mono text-xs text-[var(--text-1)]">
+            <span class="pulse-dot"></span>
+            Disponível para projetos freelance
+          </div>
+        </div>
+
+        <!-- Visual: painel de código (elemento assinatura) -->
+        <div class="relative" data-reveal>
+          <div class="code-window rounded-2xl overflow-hidden max-w-md mx-auto lg:mx-0">
+            <div class="code-window-header flex items-center gap-2 px-4 py-3">
+              <span class="traffic-dot bg-[#ff5f57]"></span>
+              <span class="traffic-dot bg-[#febc2e]"></span>
+              <span class="traffic-dot bg-[#28c840]"></span>
+              <span class="font-mono text-[11px] text-[var(--text-2)] ml-2">ryan.dev.js</span>
+            </div>
+            <pre class="font-mono text-[13px] sm:text-sm leading-7 px-5 py-6 overflow-x-auto"><code id="hero-code" aria-label="Trecho de código ilustrativo"></code></pre>
+          </div>
+
+          <!-- Badges flutuantes -->
+          <div class="hidden sm:flex flex-col gap-3 absolute -right-4 top-6 lg:-right-10">
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">JavaScript</div>
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">Tailwind CSS</div>
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">Firebase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SOBRE MIM
+    ========================================================== -->
+    <section id="sobre" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+          <div data-reveal>
+            <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">SOBRE MIM</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
+              Quem está por trás do código?
+            </h2>
+            <p class="text-[var(--text-1)] leading-relaxed mb-4">
+              Sou Ryan Barbosa, desenvolvedor Front-End brasileiro de 20 anos, apaixonado por tecnologia e desenvolvimento web. Trabalho criando experiências digitais modernas, responsivas e focadas em usabilidade.
+            </p>
+            <p class="text-[var(--text-1)] leading-relaxed">
+              Desenvolvo projetos reais aplicando boas práticas de código, atenção a detalhes visuais e cuidado com performance. Estou sempre estudando novas tecnologias e formas de evoluir como profissional, buscando entregar interfaces que unem estética e funcionalidade.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4" data-reveal="stagger">
+            <div class="card rounded-2xl p-6 text-center">
+              <p class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]" data-count="20">0</p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">ANOS</p>
+            </div>
+            <div class="card rounded-2xl p-6 text-center">
+              <p class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]">
+                +<span data-count="12">0</span>
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">PROJETOS</p>
+            </div>
+            <div class="card rounded-2xl p-6 text-center">
+              <p class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]" data-count="100">0</p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">% FOCO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STACK / TECNOLOGIAS
+    ========================================================== -->
+    <section id="stack" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">STACK</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Minha Stack</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger">
+          <!-- HTML5 -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M8 7h8l-.4 5H9l.2 2.5 2.8.8 2.8-.8.2-2"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">HTML5</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estrutura semântica e acessível para todas as interfaces que construo.</p>
+          </div>
+          <!-- CSS3 -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M16 7H8l.3 3.5H15l-.3 4-2.7.9-2.7-.9-.2-2"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">CSS3</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Layouts responsivos, animações e atenção a cada detalhe visual.</p>
+          </div>
+          <!-- JavaScript -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 15.5c.3.8 1 1.3 1.9 1.3 1 0 1.6-.6 1.6-1.7v-4.6M16.5 16.8c-1.5 0-2.4-.7-2.4-1.7 0-.9.6-1.4 1.7-1.8l.6-.2c.7-.3 1-.5 1-1s-.5-.9-1.2-.9c-.7 0-1.2.3-1.6.9"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">JavaScript</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Minha principal linguagem para criar interfaces interativas e experiências dinâmicas.</p>
+          </div>
+          <!-- Tailwind -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M6 12c.8-3 2.5-4.5 5-4.5 3.5 0 4 2.5 5.5 2.5 1.2 0 2-.7 2.5-2 -.8 3-2.5 4.5-5 4.5-3.5 0-4-2.5-5.5-2.5-1.2 0-2 .7-2.5 2z"/><path d="M2 17.5c.8-3 2.5-4.5 5-4.5 3.5 0 4 2.5 5.5 2.5 1.2 0 2-.7 2.5-2 -.8 3-2.5 4.5-5 4.5-3.5 0-4-2.5-5.5-2.5-1.2 0-2 .7-2.5 2z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Tailwind CSS</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estilização rápida, consistente e escalável para qualquer interface.</p>
+          </div>
+          <!-- Firebase -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M5 19l2.5-15 3 6.2L13 5l6 14-14 0z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Firebase</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Autenticação, banco de dados e hospedagem para aplicações web completas.</p>
+          </div>
+          <!-- Git -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="12" r="2"/><path d="M6 8v8M8 6h4a5 5 0 0 1 5 5v0"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Git</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Controle de versão organizado para todo o meu fluxo de trabalho.</p>
+          </div>
+          <!-- GitHub -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.3-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">GitHub</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Onde publico, versiono e compartilho meus projetos de forma aberta.</p>
+          </div>
+          <!-- Serviços/UX card -->
+          <div class="card card-glow-line rounded-2xl p-6 flex flex-col justify-center">
+            <p class="font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">SEMPRE APRENDENDO</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Explorando novas ferramentas e boas práticas para evoluir a cada projeto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROJETOS
+    ========================================================== -->
+    <section id="projetos" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">PORTFÓLIO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-3">Projetos selecionados</h2>
+          <p class="text-[var(--text-1)] leading-relaxed">
+            Alguns projetos que representam minha evolução e experiência como desenvolvedor.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal="stagger">
+          <!-- Projeto 01 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]">preview / 01</span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Dashboard Financeiro</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Plataforma de controle financeiro com interface moderna e responsiva.
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">JavaScript • Tailwind CSS • Firebase</p>
+              <div class="flex gap-3">
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projeto 02 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]">preview / 02</span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Landing Page</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Landing page profissional desenvolvida para apresentação de serviços.
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">HTML • CSS • JavaScript • Tailwind</p>
+              <div class="flex gap-3">
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projeto 03 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]">preview / 03</span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Sistema Web</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Aplicação web com gerenciamento de dados e integração com Firebase.
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">JavaScript • Firebase • Tailwind CSS</p>
+              <div class="flex gap-3">
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="font-mono text-[11px] text-[var(--text-2)] mt-8">
+          * Projetos ilustrativos — links prontos para receber URLs e repositórios reais.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         GITHUB
+    ========================================================== -->
+    <section id="github" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">GITHUB</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
+            Código aberto. Projetos reais.
+          </h2>
+          <p class="text-[var(--text-1)] leading-relaxed mb-8 max-w-md">
+            Grande parte da minha evolução como desenvolvedor acontece através da criação de projetos e experimentação de novas tecnologias.
+          </p>
+          <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium">
+            Ver GitHub
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+        <div class="terminal rounded-2xl overflow-hidden" data-reveal>
+          <div class="code-window-header flex items-center gap-2 px-4 py-3">
+            <span class="traffic-dot bg-[#ff5f57]"></span>
+            <span class="traffic-dot bg-[#febc2e]"></span>
+            <span class="traffic-dot bg-[#28c840]"></span>
+            <span class="font-mono text-[11px] text-[var(--text-2)] ml-2">terminal — zsh</span>
+          </div>
+          <div id="terminal-body" class="font-mono text-[13px] leading-7 px-5 py-6 min-h-[220px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROCESSO DE TRABALHO
+    ========================================================== -->
+    <section id="processo" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-16" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">FLUXO DE TRABALHO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Como eu trabalho</h2>
+        </div>
+
+        <div class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-10" data-reveal="stagger">
+          <div class="hidden lg:block process-line absolute top-6 left-0 right-0 h-px" aria-hidden="true"></div>
+
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">01</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Ideia</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Entendo o objetivo e as necessidades do projeto.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">02</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Planejamento</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estruturo a solução, layout e experiência do usuário.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">03</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Desenvolvimento</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Transformo o planejamento em uma aplicação funcional.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">04</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Entrega</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Faço os ajustes finais e entrego o projeto pronto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SERVIÇOS
+    ========================================================== -->
+    <section id="servicos" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">SERVIÇOS</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">O que posso desenvolver?</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger">
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Landing Pages</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Sites modernos, responsivos e focados em conversão.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Sites Institucionais</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Presença profissional para empresas e negócios.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Interfaces Web</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Interfaces modernas e intuitivas para aplicações.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Sistemas Web</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Aplicações utilizando JavaScript e Firebase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CONTATO
+    ========================================================== -->
+    <section id="contato" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">CONTATO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-5">
+            Vamos construir algo incrível?
+          </h2>
+          <p class="text-[var(--text-1)] leading-relaxed mb-10 max-w-md">
+            Tem uma ideia, projeto ou negócio que precisa de uma presença digital? Vamos conversar.
+          </p>
+
+          <ul class="space-y-4 font-mono text-sm">
+            <li>
+              <a href="mailto:ryan4x4x1@gmail.com" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">✉</span>
+                ryanSilva
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">GH</span>
+                github.com/ryansilva0
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">in</span>
+                linkedin.com/in/ryanbarbosa
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/ryanz.barbosa" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">IG</span>
+                @ryanbarbosa.dev
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <form id="contact-form" class="card rounded-2xl p-6 sm:p-8" data-reveal novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="sm:col-span-1">
+              <label for="name" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">NOME</label>
+              <input type="text" id="name" name="name" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="Seu nome" />
+            </div>
+            <div class="sm:col-span-1">
+              <label for="email" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">E-MAIL</label>
+              <input type="email" id="email" name="email" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="voce@email.com" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="subject" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">ASSUNTO</label>
+              <input type="text" id="subject" name="subject" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="Sobre o que vamos conversar?" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="message" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">MENSAGEM</label>
+              <textarea id="message" name="message" rows="5" required class="field w-full rounded-lg px-4 py-3 text-sm resize-none" placeholder="Conte um pouco sobre o seu projeto..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary mt-6 w-full sm:w-auto rounded-full px-7 py-3.5 text-sm font-medium">
+            Enviar mensagem
+          </button>
+          <p id="form-status" class="text-sm mt-4 text-[var(--text-2)]" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="border-t border-[var(--border-soft)] py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="text-center sm:text-left">
+        <p class="font-mono text-xs text-[var(--text-2)]">
+          © <span id="current-year">2026</span> Ryan Barbosa. Todos os direitos reservados.
+        </p>
+        <p class="font-mono text-[11px] text-[var(--text-2)] mt-1">Desenvolvido por Ryan Barbosa.</p>
+      </div>
+
+      <div class="flex items-center gap-5 font-mono text-xs text-[var(--text-1)]">
+        <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">LinkedIn</a>
+        <a href="https://instagram.com/ryanz.barbosa" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
