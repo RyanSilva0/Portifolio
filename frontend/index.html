@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ryan Barbosa | Front-End Developer & Freelancer</title>
+  <meta name="description" content="Portfólio profissional de Ryan Barbosa, desenvolvedor Front-End freelancer especializado em JavaScript, Tailwind CSS e Firebase." />
+  <meta name="author" content="Ryan Barbosa" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ryan Barbosa | Front-End Developer & Freelancer" />
+  <meta property="og:description" content="Desenvolvedor Front-End freelancer especializado em JavaScript, Tailwind CSS e Firebase. Veja projetos, stack e formas de contato." />
+  <meta property="og:image" content="assets/images/og-cover.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+
+  <!-- Fontes + estilos autorais -->
+  <link rel="stylesheet" href="/src/output.css">
+  <link rel="stylesheet" href="config.css">
+
+  <!--
+    TAILWIND VIA CDN
+    Este projeto usa o Tailwind Play CDN (build via JIT no navegador).
+    Não é necessário nenhum passo de instalação para visualizar o site.
+    Para migrar para uma instalação local, veja as instruções em src/input.css e no README.md.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-[var(--bg-0)] text-[var(--text-0)] antialiased">
+
+  <!-- Glow que segue o cursor (decorativo, desktop) -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Pular para o conteúdo (acessibilidade) -->
+  <a href="#inicio" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded">
+    Pular para o conteúdo
+  </a>
+
+  <!-- =========================================================
+       NAVBAR
+  ========================================================== -->
+  <header id="main-nav" class="glass-nav fixed top-0 inset-x-0 z-50">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Navegação principal">
+      <a href="#inicio" class="font-display text-lg font-semibold tracking-tight">
+        Ryan Barbosa <span class="text-[var(--accent)]">.</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 font-mono text-[13px] tracking-tight">
+        <li><a href="#inicio" class="nav-link active">início</a></li>
+        <li><a href="#sobre" class="nav-link">sobre</a></li>
+        <li><a href="#projetos" class="nav-link">projetos</a></li>
+        <li><a href="#stack" class="nav-link">tecnologias</a></li>
+        <li><a href="#contato" class="nav-link">contato</a></li>
+        </ul>
+
+      <a href="#contato" class="btn-primary hidden md:inline-flex rounded-full px-5 py-2.5 text-sm font-medium">
+        Vamos conversar
+      </a>
+
+      <!-- Botão hamburger (mobile) -->
+      <button
+        id="menu-toggle"
+        class="md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[6px]"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-panel"
+      >
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+        <span class="hamburger-line block w-6 h-[1.5px] bg-[var(--text-0)]"></span>
+      </button>
+    </nav>
+
+    <!-- Painel mobile -->
+    <div id="mobile-panel" class="mobile-panel md:hidden border-t border-[var(--border-soft)]">
+      <ul class="flex flex-col px-6 py-4 gap-1 font-mono text-sm">
+        <li><a href="#inicio" class="block py-3">início</a></li>
+        <li><a href="#sobre" class="block py-3">sobre</a></li>
+        <li><a href="#projetos" class="block py-3">projetos</a></li>
+        <li><a href="#stack" class="block py-3">tecnologias</a></li>
+        <li><a href="#contato" class="block py-3">contato</a></li>
+        <li class="pt-2">
+          <a href="#contato" class="btn-primary inline-flex w-full justify-center rounded-full px-5 py-3 text-sm font-medium">
+            Vamos conversar
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+    <section id="inicio" class="relative overflow-hidden pt-40 pb-28 md:pt-48 md:pb-36">
+      <canvas id="hero-canvas" class="absolute inset-0 w-full h-full opacity-70"></canvas>
+      <div class="tech-grid" aria-hidden="true"></div>
+      <div class="noise-veil" aria-hidden="true"></div>
+
+      <div class="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
+        <!-- Texto -->
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-5 flex items-center gap-2">
+            <span aria-hidden="true">&lt;/&gt;</span> OLÁ MUNDO,SOU O RYAN BARBOSA
+          </p>
+
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] font-semibold tracking-tight text-[var(--text-0)]">
+            Transformo ideias em
+            <span class="block text-[var(--text-1)]">experiências digitais.</span>
+          </h1>
+
+          <p class="mt-6 text-base sm:text-lg text-[var(--text-1)] max-w-md leading-relaxed">
+            Desenvolvedor Front-End freelancer apaixonado por criar interfaces modernas, rápidas e funcionais para a web.
+          </p>
+
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#projetos" class="btn-primary rounded-full px-6 py-3.5 text-sm font-medium">
+              Ver meus projetos
+            </a>
+            <a href="#contato" class="btn-ghost rounded-full px-6 py-3.5 text-sm font-medium">
+              Entre em contato
+            </a>
+          </div>
+
+          <div class="mt-10 inline-flex items-center gap-3 font-mono text-xs text-[var(--text-1)]">
+            <span class="pulse-dot"></span>
+            Disponível para projetos freelance
+          </div>
+        </div>
+
+        <!-- Visual: painel de código (elemento assinatura) -->
+        <div class="relative" data-reveal>
+          <div class="code-window rounded-2xl overflow-hidden max-w-md mx-auto lg:mx-0">
+            <div class="code-window-header flex items-center gap-2 px-4 py-3">
+              <span class="traffic-dot bg-[#ff5f57]"></span>
+              <span class="traffic-dot bg-[#febc2e]"></span>
+              <span class="traffic-dot bg-[#28c840]"></span>
+              <span class="font-mono text-[11px] text-[var(--text-2)] ml-2">ryan.dev.js</span>
+            </div>
+            <pre class="font-mono text-[13px] sm:text-sm leading-7 px-5 py-6 overflow-x-auto"><code id="hero-code" aria-label="Trecho de código ilustrativo"></code></pre>
+          </div>
+
+          <!-- Badges flutuantes -->
+          <div class="hidden sm:flex flex-col gap-3 absolute -right-4 top-6 lg:-right-10">
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">JavaScript</div>
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">Tailwind CSS</div>
+            <div class="floating-badge font-mono text-[11px] px-3 py-1.5 rounded-lg shadow-lg">Firebase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SOBRE MIM
+    ========================================================== -->
+    <section id="sobre" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+          <div data-reveal>
+            <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">SOBRE MIM</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
+              Quem está por trás do código?
+            </h2>
+            <p class="text-[var(--text-1)] leading-relaxed mb-4">
+                Sou Ryan Barbosa, desenvolvedor Front-End brasileiro de <span id="ryan-age-text">21</span> anos, apaixonado por tecnologia e desenvolvimento web. Trabalho criando experiências digitais modernas, responsivas e focadas em usabilidade.
+            </p>
+            <p class="text-[var(--text-1)] leading-relaxed">
+              Desenvolvo projetos reais aplicando boas práticas de código, atenção a detalhes visuais e cuidado com performance. Estou sempre estudando novas tecnologias e formas de evoluir como profissional, buscando entregar interfaces que unem estética e funcionalidade.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4" data-reveal="stagger">
+            <div class="card rounded-2xl p-6 text-center">
+              <p id="ryan-age" class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]" data-count="21">0</p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">ANOS</p>
+            </div>
+            <div class="card rounded-2xl p-6 text-center">
+              <p class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]">
+                +<span data-count="12">0</span>
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">PROJETOS</p>
+            </div>
+            <div class="card rounded-2xl p-6 text-center">
+              <p class="stat-number font-display text-3xl sm:text-4xl font-semibold text-[var(--text-0)]" data-count="100">0</p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mt-2 tracking-wide">% FOCO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         STACK / TECNOLOGIAS
+    ========================================================== -->
+    <section id="stack" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">STACK</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Minha Stack</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger">
+          <!-- HTML5 -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M8 7h8l-.4 5H9l.2 2.5 2.8.8 2.8-.8.2-2"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">HTML5</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estrutura semântica e acessível para todas as interfaces que construo.</p>
+          </div>
+          <!-- CSS3 -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M16 7H8l.3 3.5H15l-.3 4-2.7.9-2.7-.9-.2-2"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">CSS3</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Layouts responsivos, animações e atenção a cada detalhe visual.</p>
+          </div>
+          <!-- JavaScript -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 15.5c.3.8 1 1.3 1.9 1.3 1 0 1.6-.6 1.6-1.7v-4.6M16.5 16.8c-1.5 0-2.4-.7-2.4-1.7 0-.9.6-1.4 1.7-1.8l.6-.2c.7-.3 1-.5 1-1s-.5-.9-1.2-.9c-.7 0-1.2.3-1.6.9"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">JavaScript</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Minha principal linguagem para criar interfaces interativas e experiências dinâmicas.</p>
+          </div>
+          <!-- Tailwind -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M6 12c.8-3 2.5-4.5 5-4.5 3.5 0 4 2.5 5.5 2.5 1.2 0 2-.7 2.5-2 -.8 3-2.5 4.5-5 4.5-3.5 0-4-2.5-5.5-2.5-1.2 0-2 .7-2.5 2z"/><path d="M2 17.5c.8-3 2.5-4.5 5-4.5 3.5 0 4 2.5 5.5 2.5 1.2 0 2-.7 2.5-2 -.8 3-2.5 4.5-5 4.5-3.5 0-4-2.5-5.5-2.5-1.2 0-2 .7-2.5 2z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Tailwind CSS</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estilização rápida, consistente e escalável para qualquer interface.</p>
+          </div>
+          <!-- Firebase -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M5 19l2.5-15 3 6.2L13 5l6 14-14 0z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Firebase</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Autenticação, banco de dados e hospedagem para aplicações web completas.</p>
+          </div>
+          <!-- Git -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="12" r="2"/><path d="M6 8v8M8 6h4a5 5 0 0 1 5 5v0"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">Git</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Controle de versão organizado para todo o meu fluxo de trabalho.</p>
+          </div>
+          <!-- GitHub -->
+          <div class="card card-glow-line rounded-2xl p-6">
+            <svg class="w-8 h-8 mb-4" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.3-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
+            <h3 class="font-display font-semibold text-lg mb-1.5">GitHub</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Onde publico, versiono e compartilho meus projetos de forma aberta.</p>
+          </div>
+          <!-- Serviços/UX card -->
+          <div class="card card-glow-line rounded-2xl p-6 flex flex-col justify-center">
+            <p class="font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">SEMPRE APRENDENDO</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Explorando novas ferramentas e boas práticas para evoluir a cada projeto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         IAs QUE EU USO
+    ========================================================== -->
+    <section id="ias" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">INTELIGÊNCIA ARTIFICIAL</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-3">As IAs que uso no dia a dia</h2>
+          <p class="text-[var(--text-1)] leading-relaxed">
+            Cada ferramenta com a sua função no meu fluxo de trabalho.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger">
+          <!-- Claude -->
+          <article class="card card-glow-line rounded-2xl p-6 flex flex-col">
+            <span class="w-11 h-11 mb-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-0)] flex items-center justify-center text-[var(--text-0)]"><svg class="w-6 h-6" viewBox="0 0 24 24" role="img" aria-label="Logo do Claude"><path fill="#D97757" fill-rule="nonzero" d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z"/></svg></span>
+            <h3 class="font-display font-semibold text-lg mb-1">Claude</h3>
+            <p class="font-mono text-[11px] text-[var(--accent)] mb-3 tracking-wide">Código e segurança</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed mb-5 flex-1">
+              Escrevo, reviso e refatoro código com ele, e também uso para encontrar falhas antes de o projeto ir ao ar.
+            </p>
+            <p class="font-mono text-[11px] text-[var(--text-2)]">Código • Revisão • Segurança</p>
+          </article>
+
+          <!-- ChatGPT -->
+          <article class="card card-glow-line rounded-2xl p-6 flex flex-col">
+            <span class="w-11 h-11 mb-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-0)] flex items-center justify-center text-[var(--text-0)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Logo do ChatGPT / OpenAI"><path fill-rule="evenodd" d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/></svg></span>
+            <h3 class="font-display font-semibold text-lg mb-1">ChatGPT</h3>
+            <p class="font-mono text-[11px] text-[var(--accent)] mb-3 tracking-wide">Prompts, imagens e mais</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed mb-5 flex-1">
+              Minha ferramenta para criar e refinar prompts, gerar imagens e destravar ideias e textos.
+            </p>
+            <p class="font-mono text-[11px] text-[var(--text-2)]">Prompts • Imagens • Ideias</p>
+          </article>
+
+          <!-- Copilot -->
+          <article class="card card-glow-line rounded-2xl p-6 flex flex-col">
+            <span class="w-11 h-11 mb-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-0)] flex items-center justify-center text-[var(--text-0)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Logo do GitHub Copilot"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></svg></span>
+            <h3 class="font-display font-semibold text-lg mb-1">Copilot no VS Code</h3>
+            <p class="font-mono text-[11px] text-[var(--accent)] mb-3 tracking-wide">Manutenção e pequenos ajustes</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed mb-5 flex-1">
+              Direto no editor, para manter o código em dia e adicionar pequenas funcionalidades sem quebrar o ritmo.
+            </p>
+            <p class="font-mono text-[11px] text-[var(--text-2)]">VS Code • Manutenção • Novas features</p>
+          </article>
+
+          <!-- Flow -->
+          <article class="card card-glow-line rounded-2xl p-6 flex flex-col">
+            <span class="w-11 h-11 mb-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-0)] flex items-center justify-center text-[var(--text-0)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" role="img" aria-label="Ícone do Flow"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5-4.5-2.5z"/></svg></span>
+            <h3 class="font-display font-semibold text-lg mb-1">Flow</h3>
+            <p class="font-mono text-[11px] text-[var(--accent)] mb-3 tracking-wide">Vídeos feitos por IA</p>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed mb-5 flex-1">
+              Uso para criar vídeos gerados por IA, de cenas curtas a conteúdo para divulgação.
+            </p>
+            <p class="font-mono text-[11px] text-[var(--text-2)]">Vídeo • Cenas • Conteúdo</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROJETOS
+    ========================================================== -->
+    <section id="projetos" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">PORTFÓLIO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-3">Projetos selecionados</h2>
+          <p class="text-[var(--text-1)] leading-relaxed">
+            Alguns projetos que representam minha evolução e experiência como desenvolvedor.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal="stagger">
+          <!-- Projeto 01 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]"><img src="/src/preview1.png" alt=""></span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Central de Despacho - AMO ASSESSORIA</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Plataforma de controle de Vendedores, organização da fila de vendedores, visualização de relatorios no site, manipulação de Filas
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">JavaScript • Tailwind CSS • Firebase</p>
+              <div class="flex gap-3">
+                <a href="https://filaamo.web.app" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="https://github.com/RyanSilva0" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projeto 02 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]"><img src="/src/preview2.png" alt=""></span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Anime Protagonist</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Jogo web em que você roube atributos de lendas do anime para montar seu protagonista. Landing page animada, 8 classes, modos Casual e Pro e interface responsiva, feito com HTML, Tailwind e JavaScript puro.
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">HTML • CSS • JavaScript • Tailwind</p>
+              <div class="flex gap-3">
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projeto 03 -->
+          <article class="card card-glow-line rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-40 flex items-center justify-center bg-gradient-to-br from-[var(--bg-3)] to-[var(--bg-1)] border-b border-[var(--border-soft)]">
+              <span class="font-mono text-xs text-[var(--text-2)]">preview / 03</span>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-semibold text-lg mb-2">Sistema Web</h3>
+              <p class="text-sm text-[var(--text-1)] leading-relaxed mb-4 flex-1">
+                Aplicação web com gerenciamento de dados e integração com Firebase.
+              </p>
+              <p class="font-mono text-[11px] text-[var(--text-2)] mb-5">JavaScript • Firebase • Tailwind CSS</p>
+              <div class="flex gap-3">
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">Ver projeto</a>
+                <a href="#" class="btn-ghost flex-1 text-center rounded-full px-4 py-2.5 text-xs font-medium">GitHub</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         GITHUB
+    ========================================================== -->
+    <section id="github" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">GITHUB</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
+            Código aberto. Projetos reais.
+          </h2>
+          <p class="text-[var(--text-1)] leading-relaxed mb-8 max-w-md">
+            Grande parte da minha evolução como desenvolvedor acontece através da criação de projetos e experimentação de novas tecnologias.
+          </p>
+          <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium">
+            Ver GitHub
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+        <div class="terminal rounded-2xl overflow-hidden" data-reveal>
+          <div class="code-window-header flex items-center gap-2 px-4 py-3">
+            <span class="traffic-dot bg-[#ff5f57]"></span>
+            <span class="traffic-dot bg-[#febc2e]"></span>
+            <span class="traffic-dot bg-[#28c840]"></span>
+            <span class="font-mono text-[11px] text-[var(--text-2)] ml-2">terminal — zsh</span>
+          </div>
+          <div id="terminal-body" class="font-mono text-[13px] leading-7 px-5 py-6 min-h-[220px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROCESSO DE TRABALHO
+    ========================================================== -->
+    <section id="processo" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-16" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">FLUXO DE TRABALHO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Como eu trabalho</h2>
+        </div>
+
+        <div class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-10" data-reveal="stagger">
+          <div class="hidden lg:block process-line absolute top-6 left-0 right-0 h-px" aria-hidden="true"></div>
+
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">01</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Ideia</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Entendo o objetivo e as necessidades do projeto.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">02</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Planejamento</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Estruturo a solução, layout e experiência do usuário.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">03</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Desenvolvimento</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Transformo o planejamento em uma aplicação funcional.</p>
+          </div>
+          <div class="relative">
+            <p class="font-mono text-2xl text-[var(--accent)] mb-4">04</p>
+            <h3 class="font-display font-semibold text-lg mb-2">Entrega</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Faço os ajustes finais e entrego o projeto pronto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SERVIÇOS
+    ========================================================== -->
+    <section id="servicos" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-xl mb-14" data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">SERVIÇOS</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight">O que posso desenvolver?</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-reveal="stagger">
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Landing Pages</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Sites modernos, responsivos e focados em conversão.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Sites Institucionais</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Presença profissional para empresas e negócios.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Interfaces Web</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Interfaces modernas e intuitivas para aplicações.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-display font-semibold text-lg mb-2">Sistemas Web</h3>
+            <p class="text-sm text-[var(--text-1)] leading-relaxed">Aplicações utilizando JavaScript e Firebase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CONTATO
+    ========================================================== -->
+    <section id="contato" class="relative py-24 md:py-32 border-t border-[var(--border-soft)]">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+        <div data-reveal>
+          <p class="font-mono text-xs tracking-widest text-[var(--accent)] mb-4">CONTATO</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-5">
+            Vamos construir algo incrível?
+          </h2>
+          <p class="text-[var(--text-1)] leading-relaxed mb-10 max-w-md">
+            Tem uma ideia, projeto ou negócio que precisa de uma presença digital? Vamos conversar.
+          </p>
+
+          <ul class="space-y-4 font-mono text-sm">
+            <li>
+              <a href="mailto:ryan4x4x1@gmail.com" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">✉</span>
+                ryanSilva
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">GH</span>
+                github.com/ryansilva0
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">in</span>
+                linkedin.com/in/ryanbarbosa
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/ryanz.barbosa" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-[var(--text-1)] hover:text-[var(--text-0)] transition-colors">
+                <span class="w-9 h-9 rounded-full border border-[var(--border-subtle)] flex items-center justify-center">IG</span>
+                @ryanbarbosa.dev
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <form id="contact-form" class="card rounded-2xl p-6 sm:p-8" data-reveal novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="sm:col-span-1">
+              <label for="name" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">NOME</label>
+              <input type="text" id="name" name="name" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="Seu nome" />
+            </div>
+            <div class="sm:col-span-1">
+              <label for="email" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">E-MAIL</label>
+              <input type="email" id="email" name="email" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="voce@email.com" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="subject" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">ASSUNTO</label>
+              <input type="text" id="subject" name="subject" required class="field w-full rounded-lg px-4 py-3 text-sm" placeholder="Sobre o que vamos conversar?" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="message" class="block font-mono text-[11px] text-[var(--text-2)] mb-2 tracking-wide">MENSAGEM</label>
+              <textarea id="message" name="message" rows="5" required class="field w-full rounded-lg px-4 py-3 text-sm resize-none" placeholder="Conte um pouco sobre o seu projeto..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary mt-6 w-full sm:w-auto rounded-full px-7 py-3.5 text-sm font-medium">
+            Enviar mensagem
+          </button>
+          <p id="form-status" class="text-sm mt-4 text-[var(--text-2)]" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="border-t border-[var(--border-soft)] py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="text-center sm:text-left">
+        <p class="font-mono text-xs text-[var(--text-2)]">
+          © <span id="current-year">2026</span> Ryan Barbosa. Todos os direitos reservados.
+        </p>
+        <p class="font-mono text-[11px] text-[var(--text-2)] mt-1">Desenvolvido por Ryan Barbosa.</p>
+      </div>
+
+      <div class="flex items-center gap-5 font-mono text-xs text-[var(--text-1)]">
+        <a href="https://github.com/ryansilva0" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">LinkedIn</a>
+        <a href="https://instagram.com/ryanz.barbosa" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-0)] transition-colors">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
